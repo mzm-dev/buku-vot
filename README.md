@@ -5,6 +5,12 @@ Sistem ini hanya sekadar alat bantu untuk tujuan penyelenggaraan VOT secara atas
 
 http://mzm-dev.github.io/buku-vot/
 
+Database
+=======
+
+http://pastebin.com/4Hwtq9eY
+
+
 Komen
 =======
 Sebarang komen untuk penambaikan sistem ini, boleh kunjungi
