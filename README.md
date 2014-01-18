@@ -1,8 +1,6 @@
 Penyelenggaraan VOT
 =======
 
-Buku Vot adalah untuk mengawal peruntukan dan perbelanjaan 
-Buku Vot adalah penting bagi tujuan mengawal peruntukan mengurus, pembangunan, akaun khas dan tabung amanah. 
 Sistem ini hanya sekadar alat bantu untuk tujuan penyelenggaraan VOT secara atas talian.
 
 Komen
