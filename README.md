@@ -7,7 +7,8 @@ Komen
 =======
 Sebarang komen untuk penambaikan sistem ini, boleh kunjungi
 
-[![mzmDev](https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t5/s32x32/1209872_20531316728_442276420_q.jpg)](https://www.facebook.com/mzmDev)https://www.facebook.com/mzmDev
+[![mzmDev](https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t5/s32x32/1209872_20531316728_442276420_q.jpg)](https://www.facebook.com/mzmDev)
+https://www.facebook.com/mzmDev
 
 Get Support!
 ------------
