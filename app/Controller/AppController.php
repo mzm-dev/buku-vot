@@ -31,7 +31,32 @@ class AppController extends Controller {
      * @var array
      */
     public $theme = "MzmsTheme";
-
+    public $components = array(
+       
+        'Acl',
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array('username' => 'username'),
+                    'scope' => array('User.status' => 1)
+                )
+            ),
+            'authorize' => array(
+                'Actions' => array('actionPath' => 'controllers')
+            )
+        ),        
+        'Session', 'RequestHandler',        
+    );
     
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow("login","logut"); //must comment after generate action for cakephp 2.0
+        //$this->Auth->allow(); //must comment after generate action for cakephp 2.1
+        //Configure AuthComponent
+        $this->Auth->flash = array("element" => "AclManagement.error", "key" => "auth", "params" => array());
+        $this->Auth->loginAction = '/users/login';
+        //$this->Auth->logoutRedirect = array('plugin' => false, 'controller' => 'books', 'action' => 'home');
+        //$this->Auth->loginRedirect = array('plugin' => false, 'controller' => 'books', 'action' => 'index');
+    }
 
 }

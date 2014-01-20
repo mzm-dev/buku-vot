@@ -164,6 +164,13 @@ class particular extends AppModel {
             'conditions' => '',
             'fields' => '',
             'order' => ''
+        ),
+        'Activity' => array(
+            'className' => 'Activity',
+            'foreignKey' => 'activity_id',
+            'conditions' => '',
+            'fields' => '',
+            'order' => ''
         )
     );
     var $hasMany = array(

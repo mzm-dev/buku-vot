@@ -21,7 +21,6 @@
                         <th><?php echo $this->Paginator->sort('TARIKH'); ?></th>
                         <th><?php echo $this->Paginator->sort('PERUNTUKAN'); ?></th>
                         <th><?php echo $this->Paginator->sort('BAKI MASIH ADA'); ?></th> 
-                        <th><?php echo $this->Paginator->sort('TANGGUNGAN BELUM SELESAI'); ?></th>                                               
                         <th><?php echo $this->Paginator->sort('PERBELANJAAN BERSIH'); ?></th>                                                                       
                         <th class="span2"><?php echo __('#'); ?></th>
                     </tr>
@@ -33,13 +32,12 @@
                             <td><?php echo h($book['Book']['obj_as']); ?>&nbsp;</td>
                             <td><?php echo h($book['Book']['date']); ?>&nbsp;</td>
                             <td><?php echo h($this->Number->currency($book['Book']['amount'], 'RM')); ?>&nbsp;</td>                            
-                            <td><?php echo h($this->Number->currency($book['Book']['curr_balance'], 'RM')); ?>&nbsp;</td>
-                            <td><?php echo h($this->Number->currency($book['Book']['curr_tbs'], 'RM')); ?>&nbsp;</td>
+                            <td><?php echo h($this->Number->currency($book['Book']['curr_balance'], 'RM')); ?>&nbsp;</td>                            
                             <td><?php echo h($this->Number->currency($book['Book']['curr_expense'], 'RM')); ?>&nbsp;</td>                                                                                  
                             <td class="actions">
-                                <?php echo $this->Html->link(__('View'), array('action' => 'view', $book['Book']['id'])); ?>
-                                <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $book['Book']['id'])); ?>
-                                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $book['Book']['id']), null, __('Are you sure you want to delete # %s?', $book['Book']['id'])); ?>
+                                <?php echo $this->Html->link(('<span class="fs1" aria-hidden="true" data-icon="&#xe07f;"></span>'), array('action' => 'view', $book['Book']['id']), array('data-placement' => 'top', 'data-original-title' => 'View', 'escape' => FALSE)); ?>
+                                <?php echo $this->Html->link(('<span class="fs1" aria-hidden="true" data-icon="&#xe005;"></span>'), array('action' => 'edit', $book['Book']['id']), array('data-placement' => 'top', 'data-original-title' => 'Edit', 'escape' => FALSE)); ?>                                
+                                <?php echo $this->Form->postLink(__('<span class="fs1" aria-hidden="true" data-icon="&#xe0a8;"></span>'), array('action' => 'delete', $book['Book']['id']), array('data-placement' => 'top', 'data-original-title' => 'Delete', 'escape' => FALSE), __('Are you sure you want to delete # %s?', $book['Book']['id'])); ?>                               
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -1,0 +1,64 @@
+<div class="row-fluid">   
+    <div class="span12">
+        <!--        <ul class="breadcrumb-beauty">
+                    <li><?php #echo $this->Html->link('User', array('action' => 'index'));    ?></li>        
+                    <li><a data-original-title="" href="#">Edit User</a></li>
+                </ul>
+                <div class="clearfix">&nbsp;</div>-->
+        <div class="widget">
+            <div class="widget-header">
+                <div class="title">
+                    <span class="fs1" aria-hidden="true" data-icon="&#xe14c;"></span><?php echo __('Change Password User'); ?>                </div>                
+            </div>
+            <div class="widget-body" id="categories-form"> 
+                <div class="alert alert-block alert-warning fade in">                  
+                    <h4 class="alert-heading">
+                        TUKAR PASSWORD!
+                    </h4>
+                    <p>Anda dikehendaki menukar katalaluan <i>default system</i> kepada katalaluan pengguna sendiri</p>                    
+                </div>
+
+                <?php
+                echo $this->Form->create('User', array('novalidate',
+                    'class' => 'form-horizontal no-margin',
+                    'inputDefaults' => array(
+                        'format' => array('before', 'label', 'between', 'input', 'error', 'after'),
+                        'div' => array('class' => 'control-group'),
+                        'label' => array('class' => 'control-label'),
+                        'between' => '<div class="controls">',
+                        'after' => '</div>', 'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')))));
+                echo $this->Form->input('id');
+                echo $this->Form->input('name', array(
+                    'label' => array('class' => 'control-label', 'text' => 'Name'),
+                    'placeholder' => 'name', 'readonly' => true,
+                    'class' => 'span6'));
+                echo $this->Form->input('username', array(
+                    'label' => array('class' => 'control-label', 'text' => 'Username'),
+                    'placeholder' => 'username', 'readonly' => true,
+                    'class' => 'span6'));
+                echo $this->Form->input('email', array(
+                    'label' => array('class' => 'control-label', 'text' => 'Email'),
+                    'placeholder' => 'email', 'readonly' => true,
+                    'class' => 'span6'));
+                echo $this->Form->input('password', array(
+                    'label' => array('class' => 'control-label', 'text' => 'Password'),
+                    'placeholder' => 'password',
+                    'class' => 'span6'));
+                echo $this->Form->input('password2', array(
+                    'label' => array('class' => 'control-label', 'text' => 'Confirm Password'),
+                    'placeholder' => 'password', 'type' => 'password',
+                    'class' => 'span6'));
+                echo $this->Form->input('group_id', array(
+                    'label' => array('class' => 'control-label', 'text' => 'Group'),
+                    'empty' => 'Select Group', 'readonly' => true,
+                    'class' => 'span6'));
+                ?>
+                <div class="form-actions no-margin">                    
+                    <?php echo $this->Form->submit(__('Submit'), array('class' => 'btn btn-info', 'div' => false)); ?>
+                    <?php echo $this->Form->reset(__('Cancel'), array('class' => 'btn', 'div' => false)); ?>                   
+                </div>
+                <?php echo $this->Form->end(); ?>
+            </div>
+        </div>
+    </div>
+</div>

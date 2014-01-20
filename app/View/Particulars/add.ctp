@@ -16,7 +16,7 @@
                         'between' => '<div class="controls">',
                         'after' => '</div>', 'error' => array('attributes' => array('wrap' => 'span', 'class' => 'help-inline')))));
 
-                 echo $this->Form->input('book_id');
+                 echo $this->Form->input('book_id');                 
                  echo $this->Form->input('name', array(
                     'label' => array('class' => 'control-label', 'text' => 'Nama'),
                     'placeholder' => 'name',
@@ -32,13 +32,13 @@
                     'class' => 'span6','rows'=>2));
               
                 echo $this->Form->input('date1', array(
-                    'label' => array('class' => 'control-label', 'text' => 'Tarikh'),
+                    'label' => array('class' => 'control-label', 'text' => 'Tarikh Mula'),
                     'between' => '<div class="controls"><div class="datepicker input-append" id="datepicker">',
                     'data-format' => 'dd-MM-yyyy', 'class' => 'span6',
                     'after' => '<span class="add-on"><i data-date-icon="icon-calendar"></i></span></div></div>',
                 ));
                 echo $this->Form->input('date2', array(
-                    'label' => array('class' => 'control-label', 'text' => 'Tarikh'),
+                    'label' => array('class' => 'control-label', 'text' => 'Tarikh Tamat'),
                     'between' => '<div class="controls"><div class="datepicker input-append" id="datepicker">',
                     'data-format' => 'dd-MM-yyyy', 'class' => 'span6',
                     'after' => '<span class="add-on"><i data-date-icon="icon-calendar"></i></span></div></div>',

@@ -63,7 +63,8 @@ class ParticularsController extends AppController {
                     'Book.curr_balance' => $currBalance), array('Book.id' => $id));
                 $this->request->data['Particular']['balance'] = $currBalance;
                 $this->request->data['Particular']['expense'] = $currExpense;
-                $this->request->data['Particular']['user_id'] = rand(1, 7); //sementara
+                $this->request->data['Particular']['user_id'] = $this->Session->read('Auth.User.id');
+                $this->request->data['Particular']['activity_id'] = 1;
             }
 
 
@@ -77,7 +78,8 @@ class ParticularsController extends AppController {
         #$parentparticulars = $this->Particular->Parentparticular->find('list', array('conditions' => array( 'Parentparticular.status' => 0), 'fields' => array('Parentparticular.id', 'Parentparticular.desc'),));
         $books = $this->Particular->Book->find('list', array('conditions' => array('Book.id' => $id)));
         $types = $this->Particular->Type->find('list');
-        $this->set(compact('books', 'types'));
+        $users = $this->Particular->User->find('list');        
+        $this->set(compact('books', 'types','user'));
     }
 
     /**
@@ -107,8 +109,9 @@ class ParticularsController extends AppController {
             $this->request->data = $this->Particular->find('first', $options);
         }
         $books = $this->Particular->Book->find('list', array('conditions' => array('Book.id' => $this->request->data['Particular']['book_id'])));
-        $types = $this->Particular->Type->find('list');
-        $this->set(compact('books', 'types'));
+        $types = $this->Particular->Type->find('list');        
+        $activities = $this->Particular->Activity->find('list');        
+        $this->set(compact('books', 'types', 'activities'));
     }
 
     function __kredit($credit, $alls, $bookid, $curr_expense, $curr_balance) {

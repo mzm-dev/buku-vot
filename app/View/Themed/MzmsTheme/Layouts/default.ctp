@@ -14,18 +14,15 @@
  * @package       Cake.View.Layouts
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- *
- * @author        Mohamad Zaki Mustafa
- * @Email         mohdzaki04@gmail.com  
  */
-$cakeDescription = __d('mzm', 'Penyelenggaraan Vot');
+$cakeDescription = __d('cake_dev', Configure::read('Prj.name'));
 ?>
 <?php echo $this->Html->docType('html5'); ?> 
 <html>
     <head>
         <?php echo $this->Html->charset(); ?>
         <title>
-            <?php echo $cakeDescription ?>:
+            <?php #echo $cakeDescription  ?>:
             <?php echo $title_for_layout; ?>
         </title>
         <?php
@@ -34,18 +31,23 @@ $cakeDescription = __d('mzm', 'Penyelenggaraan Vot');
         echo $this->fetch('meta');
 
         echo $this->Html->css('main');
-        echo $this->Html->css('style');
-        echo $this->Html->css('bootstrap-datetimepicker.min');
-        echo $this->Html->css('select2');
+        echo $this->Html->css('listnav');
+        echo $this->Html->css('select2');        
+        echo $this->Html->css('bootstrap-datetimepicker.min');        
+        echo $this->Html->css('style');        
+
+
         echo $this->fetch('css');
+        echo $this->Html->script('jquery.min');
+        echo $this->fetch('script');
         ?>
 
         <script type="text/javascript">            
-            var site_url='<?php echo $this->base; ?>';     
+            var sid='<?php echo $this->Session->read('Auth.User.group_id'); ?>';     
         </script>
 
     </head>
-    <body>        
+    <body>
         <?php echo $this->element('header'); ?>
         <div class="container-fluid">
             <div class="dashboard-wrapper">
@@ -53,21 +55,24 @@ $cakeDescription = __d('mzm', 'Penyelenggaraan Vot');
                 <div class="main-container">                    
                     <div class="page-header">                         
                         <div class="clearfix"></div>
-                    </div>                        
-                    <?php echo $this->Session->flash(); ?>                   
-                    <?php echo $this->fetch('content'); ?>
+                    </div>                 
+                    <div  id="content">
+                        <?php echo $this->Session->flash(); ?>                   
+                        <?php echo $this->fetch('content'); ?>
+                    </div>                    
+                    <?php echo $this->Html->image('loader.gif', array('id' => 'busy-indicator', 'class' => 'ajax-loader')); ?>                
                 </div>
-            </div>
-        </div>    
 
-        
+            </div>
+        </div>   
         <?php
-        echo $this->Html->script('libs/jquery-1.9.1.min');
-        echo $this->Html->script('libs/bootstrap');
-        echo $this->Html->script('libs/select2.min');
+        echo $this->Html->script('bootstrap');
+        echo $this->Html->script('html5-trunk');                
+        echo $this->Html->script('tiny-scrollbar');
+        echo $this->Html->script('listnav');
+        echo $this->Html->script('select2.min');
         echo $this->Html->script('bootstrap-datetimepicker');
         echo $this->Html->script('custom');
-
         echo $this->fetch('script');
         ?>
     </body>
