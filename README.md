@@ -11,6 +11,21 @@ Database
 http://pastebin.com/4Hwtq9eY
 
 
+DEMO ID
+====
+
+ADMINISTRATOR
+
+*login : admin/password
+
+MANAGER
+
+*login : manager/password
+
+ADMINISTRATOR
+
+*login : user01/password
+
 Komen
 =======
 Sebarang komen untuk penambaikan sistem ini, boleh kunjungi
