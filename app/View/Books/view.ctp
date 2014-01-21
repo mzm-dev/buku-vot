@@ -11,7 +11,7 @@
     span.mini{
         font-size: 100%;
     }
-    
+
 </style>
 
 <div class="row-fluid">   
@@ -23,6 +23,22 @@
                 <div class="tools">
                     <div class="btn-group">
                         <?php echo $this->Html->link(('Edit Book'), array('action' => 'edit', $book['Book']['id']), array('class' => 'btn btn-info', 'data-placement' => 'top', 'data-original-title' => 'Edit Book', 'escape' => FALSE)); ?>
+                    </div>
+                    <div class="btn-group btn-success">
+                        <button class="btn btn-success">Laporan</button>
+                        <button class="btn dropdown-toggle btn-success" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <?php 
+                            foreach ($activities as $activity):
+                                echo "<li>";
+                            #echo $this->Html->link($activity['Activity']['name'], '#', array('onclick'=>"var openWin = window.open('".$html->url(array('action' => 'preview',$book['Book']['id'], $activity['Activity']['id'])."', '_blank', 'toolbar=0,scrollbars=1,location=0,status=1,menubar=0,resizable=1,width=500,height=500');  return false;"))); 
+                                echo $this->Html->link(($activity['Activity']['name']), array('action' => 'preview',$book['Book']['id'], $activity['Activity']['id']), array('target' => '_blank','id'=>'report','escape' => FALSE));
+                                echo "</li>";
+                            endforeach;
+                            ?>                            
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -66,13 +82,12 @@
                 </div> 
                 <div class="tools">
                     <div class="btn-group">
-
                         <?php echo $this->Html->link(('Add New Particular'), array('controller' => 'particulars', 'action' => 'add', $book['Book']['id']), array('class' => 'btn btn-info', 'data-placement' => 'top', 'data-original-title' => 'Add New Particular', 'escape' => FALSE)); ?>
                     </div>
                 </div>
             </div>
 
-            <div class="widget-body">
+            
                 <table id="userStyle" class="table table-condensed table-striped table-bordered table-hover no-margin">
                     <tr>                                               
 
@@ -92,7 +107,7 @@
                         <th id="admin" class="span1 ct-table"><?php echo __('Baki Masih Ada'); ?></th>                                        
                         <th id="admin" class="span2"><?php echo __('No. Ruj. Pembyaran'); ?></th>  
                         <th id="admin" class="span2"><?php echo __('Status'); ?></th> 
-                        <th id="admin" class="span1 ct-table"><?php echo __('#'); ?></th>                    
+                        <th id="admin"  class="span1 ct-table"><?php echo __('#'); ?></th>                    
                     </tr>
                     <?php
                     foreach ($particulars as $particular):
@@ -127,11 +142,11 @@
                             <td id="admin" class="rt-table" ><?php echo h($this->Number->currency($particular['Particular']['balance'], 'RM')); ?>&nbsp;</td>                            
                             <td id="admin"><?php echo h($particular['Particular']['rujukan']); ?>&nbsp;</td>
                             <td id="admin"><?php echo h($particular['Activity']['name']); ?>&nbsp;</td>
-                            <td id="admin"><?php echo $this->Html->link(('<span class="fs1" aria-hidden="true" data-icon="&#xe005;"></span>'), array('controller'=>'particulars','action' => 'edit', $particular['Particular']['id']), array('data-placement' => 'top', 'data-original-title' => 'Edit', 'escape' => FALSE)); ?></td>                        
+                            <td id="admin" ><?php echo $this->Html->link(('<span class="fs1" aria-hidden="true" data-icon="&#xe005;"></span>'), array('controller' => 'particulars', 'action' => 'edit', $particular['Particular']['id']), array('data-placement' => 'top', 'data-original-title' => 'Edit', 'escape' => FALSE)); ?></td>                        
                         </tr>
                     <?php endforeach; ?>
                 </table>
-            </div>
+            
         </div>
     </div>
 </div>

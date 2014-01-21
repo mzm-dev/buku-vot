@@ -78,8 +78,8 @@ class ParticularsController extends AppController {
         #$parentparticulars = $this->Particular->Parentparticular->find('list', array('conditions' => array( 'Parentparticular.status' => 0), 'fields' => array('Parentparticular.id', 'Parentparticular.desc'),));
         $books = $this->Particular->Book->find('list', array('conditions' => array('Book.id' => $id)));
         $types = $this->Particular->Type->find('list');
-        $users = $this->Particular->User->find('list');        
-        $this->set(compact('books', 'types','user'));
+        $users = $this->Particular->User->find('list');
+        $this->set(compact('books', 'types', 'user'));
     }
 
     /**
@@ -94,11 +94,16 @@ class ParticularsController extends AppController {
             throw new NotFoundException(__('Invalid book'));
         }
         $alls = $this->Particular->find('all', array('conditions' => array('Particular.id >=' => $id), 'recursive' => 0));
+        $curr = $this->Particular->find('first', array('conditions' => array('Particular.id' => $id), 'recursive' => 0));
 
         if ($this->request->is('post') || $this->request->is('put')) {
             $book = $this->_loadBook($this->request->data['Particular']['book_id']);
             if ($this->Particular->save($this->request->data)) {
-                $this->__kredit($this->request->data['Particular']['credit'], $alls, $this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
+                #$this->__debit($this->request->data['Particular']['debit'],$only,$this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
+                $this->__debit($this->request->data['Particular']['debit'], $curr['Particular']['debit'], $alls, $this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
+                if ($this->Session->read('Auth.User.group_id') >= 2) {
+                    $this->__kredit($this->request->data['Particular']['credit'], $alls, $this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
+                }
                 $this->Session->setFlash(__('The book has been saved'), 'flash/success');
                 $this->redirect(array('controller' => 'books', 'action' => 'view', $this->request->data['Particular']['book_id']));
             } else {
@@ -109,12 +114,44 @@ class ParticularsController extends AppController {
             $this->request->data = $this->Particular->find('first', $options);
         }
         $books = $this->Particular->Book->find('list', array('conditions' => array('Book.id' => $this->request->data['Particular']['book_id'])));
-        $types = $this->Particular->Type->find('list');        
-        $activities = $this->Particular->Activity->find('list');        
+        $types = $this->Particular->Type->find('list');
+        $activities = $this->Particular->Activity->find('list');
         $this->set(compact('books', 'types', 'activities'));
     }
 
-    function __kredit($credit, $alls, $bookid, $curr_expense, $curr_balance) {
+    private function __debit($debit, $curr, $alls, $bookid, $curr_expense, $curr_balance) {
+
+
+        if ($debit > $curr):
+            $new1 = $debit - $curr;
+            $this->Particular->Book->updateAll(array(
+                'Book.curr_expense' => $curr_expense + $new1,
+                'Book.curr_balance' => $curr_balance - $new1), array('Book.id' => $bookid)
+            );
+            foreach ($alls as $all):
+                $this->Particular->updateAll(array(
+                    'Particular.expense' => $all['Particular']['expense'] + $new1,
+                    'Particular.balance' => $all['Particular']['balance'] - $new1,
+                        ), array('Particular.id' => $all['Particular']['id']));
+            endforeach;
+        elseif ($debit < $curr):
+            $new2 = $curr - $debit;
+            $this->Particular->Book->updateAll(array(
+                'Book.curr_expense' => $curr_expense - $new2,
+                'Book.curr_balance' => $curr_balance + $new2), array('Book.id' => $bookid)
+            );
+            foreach ($alls as $all):
+                $this->Particular->updateAll(array(
+                    'Particular.expense' => $all['Particular']['expense'] - $new2,
+                    'Particular.balance' => $all['Particular']['balance'] + $new2,
+                        ), array('Particular.id' => $all['Particular']['id']));
+            endforeach;
+        else:
+
+        endif;
+    }
+
+    private function __kredit($credit, $alls, $bookid, $curr_expense, $curr_balance) {
         if (!empty($credit)) {
             $this->Particular->Book->updateAll(array(
                 'Book.curr_expense' => $curr_expense - $credit,
@@ -127,26 +164,7 @@ class ParticularsController extends AppController {
                         ), array('Particular.id' => $all['Particular']['id']));
             endforeach;
         }
-    }
-
-    public function edit1($id = null) {
-        if (!$this->Particular->exists($id)) {
-            throw new NotFoundException(__('Invalid particular'));
-        }
-        if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Particular->save($this->request->data)) {
-                $this->Session->setFlash(__('The particular has been saved'), 'flash/success');
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The particular could not be saved. Please, try again.'), 'flash/error');
-            }
-        }
-        #$parentparticulars = $this->Particular->Parentparticular->find('list', array('conditions' => array('Parentparticular.category_id' => 1, 'Parentparticular.status' => 0), 'fields' => array('Parentparticular.id', 'Parentparticular.desc'),));
-        $books = $this->Particular->Book->find('list', array('conditions' => array('Book.id' => $this->request->data['Particular']['book_id'])));
-        #$books = $this->Particular->Book->find('list');
-        $types = $this->Particular->Type->find('list');
-        $this->set(compact('books', 'types'));
-    }
+    }    
 
     /**
      * delete method

@@ -35,7 +35,8 @@ class BooksController extends AppController {
         $book = $this->Book->find('first', $options);
         $this->set('book', $book);
         $particulars = $this->Book->Particular->find('all', array('order'=>array('Particular.created')));
-        $this->set(compact('particulars'));
+        $activities = $this->Book->Particular->Activity->find('all');
+        $this->set(compact('activities','particulars'));
     }
     /**
      * view method
@@ -44,15 +45,18 @@ class BooksController extends AppController {
      * @param string $id
      * @return void
      */
-    public function preview($id = null, $activity = null) {
+    public function preview($id = null, $activity = null) {        
+        $this->layout ='report';
         if (!$this->Book->exists($id)) {
             throw new NotFoundException(__('Invalid book'));
         }
         $options = array('conditions' => array('Book.' . $this->Book->primaryKey => $id));
         $book = $this->Book->find('first', $options);
-        $this->set('book', $book);
+        $this->set('book', $book);        
         $particulars = $this->Book->Particular->find('all', array('conditions'=>array('Particular.activity_id'=>$activity),'order'=>array('Particular.created')));
-        $this->set(compact('particulars'));
+        $activities = $this->Book->Particular->Activity->find('first', array('conditions'=>array('Activity.id'=>$activity)));
+        $this->set(compact('particulars','activities'));
+        
     }
 
     /**
