@@ -146,7 +146,9 @@
                         </tr>
                     <?php endforeach; ?>
                 </table>
-            
+            <?php if(empty($particulars)):
+            echo '<div class="alert alert-block alert-error fade in"><p>Data Empty</p></div>';
+        endif; ?>
         </div>
     </div>
 </div>
