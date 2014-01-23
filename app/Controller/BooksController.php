@@ -34,7 +34,7 @@ class BooksController extends AppController {
         $options = array('conditions' => array('Book.' . $this->Book->primaryKey => $id));
         $book = $this->Book->find('first', $options);
         $this->set('book', $book);
-        $particulars = $this->Book->Particular->find('all', array('order'=>array('Particular.created')));
+        $particulars = $this->Book->Particular->find('all', array('conditions'=>array('Particular.book_id'=>$id),'order'=>array('Particular.created')));
         $activities = $this->Book->Particular->Activity->find('all');
         $this->set(compact('activities','particulars'));
     }
@@ -53,7 +53,7 @@ class BooksController extends AppController {
         $options = array('conditions' => array('Book.' . $this->Book->primaryKey => $id));
         $book = $this->Book->find('first', $options);
         $this->set('book', $book);        
-        $particulars = $this->Book->Particular->find('all', array('conditions'=>array('Particular.activity_id'=>$activity),'order'=>array('Particular.created')));
+        $particulars = $this->Book->Particular->find('all', array('conditions'=>array('Particular.activity_id'=>$activity, 'Particular.book_id'=>$id),'order'=>array('Particular.created')));
         $activities = $this->Book->Particular->Activity->find('first', array('conditions'=>array('Activity.id'=>$activity)));
         $this->set(compact('particulars','activities'));
         
