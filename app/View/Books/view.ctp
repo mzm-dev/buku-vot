@@ -107,7 +107,7 @@
                         <th id="admin" class="span1 ct-table"><?php echo __('Baki Masih Ada'); ?></th>                                        
                         <th id="admin" class="span2"><?php echo __('No. Ruj. Pembyaran'); ?></th>  
                         <th id="admin" class="span2"><?php echo __('Status'); ?></th> 
-                        <th id="admin"  class="span1 ct-table"><?php echo __('#'); ?></th>                    
+                        <th class="span1 ct-table"><?php echo __('#'); ?></th>                    
                     </tr>
                     <?php
                     foreach ($particulars as $particular):
@@ -142,7 +142,7 @@
                             <td id="admin" class="rt-table" ><?php echo h($this->Number->currency($particular['Particular']['balance'], 'RM')); ?>&nbsp;</td>                            
                             <td id="admin"><?php echo h($particular['Particular']['rujukan']); ?>&nbsp;</td>
                             <td id="admin"><?php echo h($particular['Activity']['name']); ?>&nbsp;</td>
-                            <td id="admin" ><?php echo $this->Html->link(('<span class="fs1" aria-hidden="true" data-icon="&#xe005;"></span>'), array('controller' => 'particulars', 'action' => 'edit', $particular['Particular']['id']), array('data-placement' => 'top', 'data-original-title' => 'Edit', 'escape' => FALSE)); ?></td>                        
+                            <td><?php echo $this->Html->link(('<span class="fs1" aria-hidden="true" data-icon="&#xe005;"></span>'), array('controller' => 'particulars', 'action' => 'edit', $particular['Particular']['id']), array('data-placement' => 'top', 'data-original-title' => 'Edit', 'escape' => FALSE)); ?></td>                        
                         </tr>
                     <?php endforeach; ?>
                 </table>
