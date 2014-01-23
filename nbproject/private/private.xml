@@ -2,15 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/2014/buku-vot/app/View/Books/index.ctp</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/2014/buku-vot/app/Controller/BooksController.php</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/2014/buku-vot/app/View/Particulars/index.ctp</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/2014/buku-vot/app/View/Themed/MzmsTheme/Elements/main-nav.ctp</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/2014/buku-vot/app/View/Books/preview.ctp</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/2014/buku-vot/app/View/Themed/MzmsTheme/Layouts/default.ctp</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/2014/buku-vot/app/View/Themed/MzmsTheme/webroot/js/custom.js</file>
-            <file>file:/Applications/XAMPP/xamppfiles/htdocs/2014/buku-vot/app/View/Books/view.ctp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
