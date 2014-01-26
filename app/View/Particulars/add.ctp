@@ -23,8 +23,12 @@
                     'class' => 'span6'));
                 echo $this->Form->input('type_id', array(
                     'label' => array('class' => 'control-label', 'text' => 'Jenis Rekod'),
+                    'between' => '<div class="controls">',
                     'placeholder' => 'book_id', 'empty' => 'Pilih Jenis Rekod',
-                    'class' => 'span4'));
+                    'class' => 'span4',
+                    //'after'=>'<a id="link-add-type" class="btn" href="#"> Add New Type</a>'
+                     'after' => '&nbsp;&nbsp;<a id="link-add-type" class="btn btn-small btn-info" href="#">Jenis Baru</a></div>',
+                    ));
 
                 echo $this->Form->input('title', array(
                     'label' => array('class' => 'control-label', 'text' => 'Latihan'),

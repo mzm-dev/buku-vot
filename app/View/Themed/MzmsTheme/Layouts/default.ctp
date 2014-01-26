@@ -44,6 +44,7 @@ $cakeDescription = __d('cake_dev', Configure::read('Prj.name'));
 
         <script type="text/javascript">            
             var sid='<?php echo $this->Session->read('Auth.User.group_id'); ?>';     
+            var site_url='<?php echo $this->base; ?>';
         </script>
 
     </head>
