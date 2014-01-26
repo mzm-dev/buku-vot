@@ -76,7 +76,11 @@
                 ));
                 echo $this->Form->input('invoice', array(
                     'label' => array('class' => 'control-label', 'text' => 'No. Invoice/Ruj. Lain'),
-                    'placeholder' => 'credit',
+                    'placeholder' => 'Invoice',
+                    'class' => 'span6'));
+                echo $this->Form->input('rujukan', array(
+                    'label' => array('class' => 'control-label', 'text' => 'No Rujukan'),
+                    'placeholder' => 'No Rujukan Pembayaran',
                     'class' => 'span6'));
                 echo $this->Form->input('activity_id', array(
                     'label' => array('class' => 'control-label', 'text' => 'Status'),
