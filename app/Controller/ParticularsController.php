@@ -101,9 +101,9 @@ class ParticularsController extends AppController {
             if ($this->Particular->save($this->request->data)) {
                 #$this->__debit($this->request->data['Particular']['debit'],$only,$this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
                 $this->__debit($this->request->data['Particular']['debit'], $curr['Particular']['debit'], $alls, $this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
-                if ($this->Session->read('Auth.User.group_id') >= 2) {
+                //if ($this->Session->read('Auth.User.group_id') >= 2) {
                     $this->__kredit($this->request->data['Particular']['credit'], $alls, $this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
-                }
+                //}
                 $this->Session->setFlash(__('The book has been saved'), 'flash/success');
                 $this->redirect(array('controller' => 'books', 'action' => 'view', $this->request->data['Particular']['book_id']));
             } else {
@@ -152,7 +152,7 @@ class ParticularsController extends AppController {
     }
 
     private function __kredit($credit, $alls, $bookid, $curr_expense, $curr_balance) {
-        if (!empty($credit)) {
+        if (!empty($credit) && $this->Session->read('Auth.User.group_id') >= 2) {
             $this->Particular->Book->updateAll(array(
                 'Book.curr_expense' => $curr_expense - $credit,
                 'Book.curr_balance' => $curr_balance + $credit), array('Book.id' => $bookid)
