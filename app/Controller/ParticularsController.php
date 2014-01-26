@@ -152,7 +152,7 @@ class ParticularsController extends AppController {
     }
 
     private function __kredit($credit, $alls, $bookid, $curr_expense, $curr_balance) {
-        if (!empty($credit) && $this->Session->read('Auth.User.group_id') >= 2) {
+        if (!empty($credit) && $this->Session->read('Auth.User.group_id') <= 2) {
             $this->Particular->Book->updateAll(array(
                 'Book.curr_expense' => $curr_expense - $credit,
                 'Book.curr_balance' => $curr_balance + $credit), array('Book.id' => $bookid)
