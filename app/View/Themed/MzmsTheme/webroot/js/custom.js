@@ -93,7 +93,16 @@ $(document).ready(function() {
                 {
                     case 'berjaya':
                         var type_name = jQuery('#TypeName').val();
-                       $("#ParticularTypeId").select2('data', {id: r.id, text: type_name});                      
+                        var type_id = r.id;
+                        var o = new Option(type_name, type_id);
+                        //$("#ParticularTypeId").select2('data', {id: r.id, text: type_name});                      
+                        //$("#ParticularTypeId").select2(type_id, type_name);                                                  
+                        $(o).html(type_name);
+                        $("#ParticularTypeId").append(o);
+                        $("#ParticularTypeId option[value='" + type_id + "']").attr('selected', 'selected');
+
+
+
                         break;
 
                     case 'error':
@@ -106,14 +115,14 @@ $(document).ready(function() {
                     // remove the old one, if any
                     jQuery('#flashMessage').remove();
                 }
-                
-                if(r.status === 'berjaya'){
+
+                if (r.status === 'berjaya') {
                     var flash = '<div id="flashMessage" class="alert alert-block alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><p>' + r.message + '</p></div>';
                     jQuery('#content').prepend(flash);
-                }else{
+                } else {
                     var flash = '<div id="flashMessage" class="alert alert-block alert-error fade in"><button type="button" class="close" data-dismiss="alert">×</button><p>' + r.message + '</p></div>';
                     jQuery('#content').prepend(flash);
-                }                   
+                }
                 jQuery('#flashMessage').fadeIn();
             }
         });
