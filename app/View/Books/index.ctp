@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-            <div class="widget-body">
+            <div class="widget-body">               
                 <table class="table table-condensed table-striped table-bordered table-hover no-margin">
                     <tr>
                         <th><?php echo $this->Paginator->sort('ID'); ?></th>

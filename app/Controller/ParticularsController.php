@@ -90,6 +90,7 @@ class ParticularsController extends AppController {
      * @return void
      */
     public function edit($id = null) {
+        
         if (!$this->Particular->exists($id)) {
             throw new NotFoundException(__('Invalid book'));
         }
@@ -102,7 +103,7 @@ class ParticularsController extends AppController {
                 #$this->__debit($this->request->data['Particular']['debit'],$only,$this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
                 $this->__debit($this->request->data['Particular']['debit'], $curr['Particular']['debit'], $alls, $this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
                 //if ($this->Session->read('Auth.User.group_id') >= 2) {
-                    $this->__kredit($this->request->data['Particular']['credit'], $alls, $this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
+                 //   $this->__kredit($this->request->data['Particular']['credit'], $alls, $this->request->data['Particular']['book_id'], $book['Book']['curr_expense'], $book['Book']['curr_balance']);
                 //}
                 $this->Session->setFlash(__('The book has been saved'), 'flash/success');
                 $this->redirect(array('controller' => 'books', 'action' => 'view', $this->request->data['Particular']['book_id']));

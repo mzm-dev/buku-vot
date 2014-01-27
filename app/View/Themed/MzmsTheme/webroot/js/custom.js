@@ -11,6 +11,12 @@ $(document).ready(function() {
     $("#ParticularTypeId").select2();
     $("#UserGroupId").select2();
     $("#ParticularActivityId").select2();
+    /*$('#ParticularCredit').attr('readonly', false);
+    $("#ParticularCheckbox:checkbox:checked").click(function() {
+        if ($(this).is('[readonly]')) {
+            $(this).removeAttr("readonly");
+        }
+    });*/
 
 
 //setting view colm table admin/user
@@ -26,7 +32,7 @@ $(document).ready(function() {
         default:
             $("th#admin").remove();
             $("td#admin").remove();
-            //$("div#admin").remove();
+            $("div#admin").remove();
             $("table#userStyle").css("fontSize", "80%");
             $("li#admin").remove();
             break;

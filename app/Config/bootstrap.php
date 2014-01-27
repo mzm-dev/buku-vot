@@ -106,3 +106,5 @@ CakeLog::config('error', array(
 	'file' => 'error',
 ));
 CakePlugin::load('AclManagement', array('routes'=>true)); // Loads plugins AclManagement
+//https://github.com/pedroelsner/filter_results/tree/2.3
+CakePlugin::load('FilterResults');

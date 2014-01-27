@@ -57,7 +57,7 @@
                     'between' => '<div class="controls"><div class="input-append"> <span class="add-on">RM</span>',
                     'after' => '</div></div>',
                     'class' => 'span8',
-                ));
+                ));                
 //                echo $this->Form->input('debit', array(
 //                    'label' => array('class' => 'control-label', 'text' => 'Debit'),
 //                    'between' => '<div class="controls"><div class="input-prepend">',

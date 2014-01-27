@@ -34,10 +34,38 @@ class BooksController extends AppController {
         $options = array('conditions' => array('Book.' . $this->Book->primaryKey => $id));
         $book = $this->Book->find('first', $options);
         $this->set('book', $book);
-        $particulars = $this->Book->Particular->find('all', array('conditions'=>array('Particular.book_id'=>$id),'order'=>array('Particular.created')));
-        $activities = $this->Book->Particular->Activity->find('all');
-        $this->set(compact('activities','particulars'));
+        $this->loadModel('Particular');
+        $this->Filter->addFilters(
+                array(
+                    'filter1' => array(
+                        'Particular.activity_id' => array(
+                            'select' => $this->Filter->select('-Pilih-', $this->Particular->Activity->find('list'))
+                        )
+                    ),
+                    'filter2' => array(
+                        'Particular.invoice' => array(
+                            'operator' => 'LIKE',
+                            'value' => array(
+                                'before' => '%', // optional
+                                'after' => '%'  // optional
+                            ),
+                            'Particular.book_id' => array('value' => $id)
+                        )
+                    ),
+                    
+                )
+        );
+
+        $this->Filter->setPaginate('order', 'Particular.created ASC'); // optional
+        $this->Filter->setPaginate('limit', 9999);              // optional        
+        $this->Filter->setPaginate('conditions', $this->Filter->getConditions());
+
+        $data = $this->Paginator->paginate('Particular', array('Particular.book_id' => $id), array('order' => array('Particular.created')));
+        $this->set('particulars', $data);
+        $activities = $this->Particular->Activity->find('all');
+        $this->set(compact('activities'));
     }
+
     /**
      * view method
      *
@@ -45,18 +73,17 @@ class BooksController extends AppController {
      * @param string $id
      * @return void
      */
-    public function preview($id = null, $activity = null) {        
-        $this->layout ='report';
+    public function preview($id = null, $activity = null) {
+        $this->layout = 'report';
         if (!$this->Book->exists($id)) {
             throw new NotFoundException(__('Invalid book'));
         }
         $options = array('conditions' => array('Book.' . $this->Book->primaryKey => $id));
         $book = $this->Book->find('first', $options);
-        $this->set('book', $book);        
-        $particulars = $this->Book->Particular->find('all', array('conditions'=>array('Particular.activity_id'=>$activity, 'Particular.book_id'=>$id),'order'=>array('Particular.created')));
-        $activities = $this->Book->Particular->Activity->find('first', array('conditions'=>array('Activity.id'=>$activity)));
-        $this->set(compact('particulars','activities'));
-        
+        $this->set('book', $book);
+        $particulars = $this->Book->Particular->find('all', array('conditions' => array('Particular.activity_id' => $activity, 'Particular.book_id' => $id), 'order' => array('Particular.created')));
+        $activities = $this->Book->Particular->Activity->find('first', array('conditions' => array('Activity.id' => $activity)));
+        $this->set(compact('particulars', 'activities'));
     }
 
     /**

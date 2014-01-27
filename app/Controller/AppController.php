@@ -31,8 +31,24 @@ class AppController extends Controller {
      * @var array
      */
     public $theme = "MzmsTheme";
+    public $helpers = array(        
+        'FilterResults.Search' => array(
+            'operators' => array(
+                'LIKE' => 'containing',
+                'NOT LIKE' => 'not containing',
+                'LIKE BEGIN' => 'starting with',
+                'LIKE END' => 'ending with',
+                '=' => 'equal to',
+                '!=' => 'different',
+                '>' => 'greater than',
+                '>=' => 'greater or equal to',
+                '<' => 'less than',
+                '<=' => 'less or equal to'
+            )
+        )
+    );
     public $components = array(
-       
+        'Paginator',
         'Acl',
         'Auth' => array(
             'authenticate' => array(
@@ -44,13 +60,23 @@ class AppController extends Controller {
             'authorize' => array(
                 'Actions' => array('actionPath' => 'controllers')
             )
-        ),        
-        'Session', 'RequestHandler',        
+        ),
+        'Session', 'RequestHandler',
+        'FilterResults.Filter' => array(
+            'auto' => array(
+                'paginate' => false,
+                'explode' => true, // recommended
+            ),
+            'explode' => array(
+                'character' => ' ',
+                'concatenate' => 'AND',
+            )
+        )
     );
-    
+
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow("login","logut"); //must comment after generate action for cakephp 2.0
+        $this->Auth->allow("login", "logut"); //must comment after generate action for cakephp 2.0
         //$this->Auth->allow(); //must comment after generate action for cakephp 2.1
         //Configure AuthComponent
         $this->Auth->flash = array("element" => "AclManagement.error", "key" => "auth", "params" => array());

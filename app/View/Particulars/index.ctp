@@ -25,8 +25,8 @@
                         <th class="span1"><?php echo __('Tarikh Latihan'); ?></th>                                                
                         <th><?php echo __('BAYARAN KEPADA (PENGAJUR/PEMOHON)'); ?></th>                                                
                         <th class="span1 ct-table"><?php echo __('Debit'); ?></th>                        
-                        <div id="admin">
-                        <th class="span1 ct-table"><?php echo __('Kredit'); ?></th>                        
+                    <div id="admin">
+                        <th class="span1 ct-table"><?php echo __('Catatan'); ?></th>                        
                         <th class="span2"><?php echo __('Tarikh Terima Invois/Tuntutan'); ?></th>  
                         <th class="span2"><?php echo __('Tarikh Kepada Unit Kew'); ?></th>  
                         <th class="span2"><?php echo __('No. Invoice/Ruj. Lain'); ?></th>  
@@ -34,7 +34,7 @@
                         <th class="span1 ct-table"><?php echo __('Baki Masih Ada'); ?></th>                                        
                         <th class="span2"><?php echo __('No. Ruj. Pembyaran'); ?></th>  
                         <th class="span2"><?php echo __('Status'); ?></th>  
-                        </div>
+                    </div>
                     </tr>
                     <?php
                     foreach ($particulars as $particular):
@@ -63,10 +63,10 @@
                             </td>                                                        
                             <td><?php echo h($particular['Particular']['payed']); ?>&nbsp;
                             <td class="rt-table" ><?php echo h($this->Number->currency($particular['Particular']['debit'], 'RM')); ?>&nbsp;</td>
-                            <div id="admin">
-                            <td class="rt-table" ><?php echo h($this->Number->currency($particular['Particular']['credit'], 'RM')); ?>&nbsp;</td>                            
+                        <div id="admin">
+                            <td><?php echo h($particular['Particular']['note']); ?>&nbsp;</td>  
                             <td><?php echo h($particular['Particular']['date3']); ?>&nbsp;</td>
-                            <td><?php echo h($particular['Particular']['date3']); ?>&nbsp;</td>
+                            <td><?php echo h($particular['Particular']['date4']); ?>&nbsp;</td>
                             <td><?php echo h($particular['Particular']['invoice']); ?>&nbsp;</td>                            
                             <td class="rt-table" ><?php echo h($this->Number->currency($particular['Particular']['expense'], 'RM')); ?>&nbsp;</td>                            
                             <td class="rt-table" ><?php echo h($this->Number->currency($particular['Particular']['balance'], 'RM')); ?>&nbsp;</td>                            
@@ -75,9 +75,9 @@
                                 if (!empty($particular['Particular']['status']))
                                     echo h('Selesai');
                                 ?>&nbsp;</td>
-                            </div>
+                        </div>
                         </tr>
-<?php endforeach; ?>
+                    <?php endforeach; ?>
                 </table>
             </div>
         </div>

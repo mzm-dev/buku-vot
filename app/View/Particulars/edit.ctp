@@ -55,13 +55,12 @@
                     'after' => '</div></div>',
                     'class' => 'span8',
                 ));
-                //echo "<div id='admin'>";                
-                echo $this->Form->input('credit', array(
-                    'label' => array('class' => 'control-label','text' => 'Kredit'),
-                    'between' => '<div class="controls"><div class="input-append"> <span class="add-on">RM</span>',
-                    'after' => '</div></div>',
-                    'class' => 'span8',
-                ));
+                
+                echo "<div id='admin'>";                                
+                echo $this->Form->input('note', array(
+                    'label' => array('class' => 'control-label', 'text' => 'Catatan'),
+                    'placeholder' => 'text', 
+                    'class' => 'span6', 'rows' => 2));
                 echo $this->Form->input('date3', array(
                     'label' => array('class' => 'control-label', 'text' => 'Tarikh Terima Invois/Tuntutan'),
                     'between' => '<div class="controls"><div class="datepicker input-append" id="datepicker">',
@@ -85,7 +84,7 @@
                 echo $this->Form->input('activity_id', array(
                     'label' => array('class' => 'control-label', 'text' => 'Status'),
                     'placeholder' => 'credit', 'class' => 'span4'));
-                //echo "</div>";
+                echo "</div>";
                 ?>
 
                 <div class="form-actions no-margin">
