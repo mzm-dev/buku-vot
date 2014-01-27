@@ -43,7 +43,7 @@
                 <div class="title">
                     <span class="fs1" aria-hidden="true" data-icon="&#xe14c;"></span><?php echo __('View Particulars'); ?>                </div>                
                 <div class="tools">
-                    <div class="btn-group">
+                    <div id='admin' class="btn-group">
                         <?php echo $this->Html->link(('Edit Particular'), array('action' => 'edit',$particular['Particular']['id']), array('class' => 'btn btn-info', 'data-placement' => 'top', 'data-original-title' => 'Edit Particular', 'escape' => FALSE)); ?>
 
                     </div>
